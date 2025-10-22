@@ -4,7 +4,7 @@ import { Container, TextField, Button, Typography, Box } from "@mui/material";
 function Login() {
   return (
     <Container sx={{ mt: 5 }}>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h4" gutterBottom sx={{color: '#007FFF'}}>
         Login
       </Typography>
       <Box component="form" sx={{ mt: 2, display: "flex", flexDirection: "column", gap: 2, width: "300px" }}>
