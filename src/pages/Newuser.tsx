@@ -11,7 +11,7 @@ import Lottie from "lottie-react";
 import { motion } from "framer-motion";
 import loginAnimation from "../assets/ani/Login.json";
 // background: linear-gradient(135deg, hsla(177, 87%, 79%, 1) 0%, hsla(235, 89%, 70%, 1) 100%);
-function Login() {
+function Newuser() {
   return (
     <Container
       sx={{
@@ -75,13 +75,46 @@ function Login() {
                 fontSize: "3rem",
               }}
             >
-              Login
+              New Account
             </Typography>
+
+            <TextField
+              label="Username"
+              variant="outlined"
+              fullWidth
+              size="medium"
+              sx={{
+                "& .MuiInputBase-input": {
+                  fontFamily: "Philosopher, serif", // change font here
+                  fontSize: "16px",
+                },
+                "& .MuiInputLabel-root": {
+                  fontFamily: "Philosopher, serif", // label font
+                },
+              }}
+            />
+
+            <TextField
+              label="Mobile Number"
+              variant="outlined"
+              fullWidth
+              size="medium"
+              sx={{
+                "& .MuiInputBase-input": {
+                  fontFamily: "Philosopher, serif", // change font here
+                  fontSize: "16px",
+                },
+                "& .MuiInputLabel-root": {
+                  fontFamily: "Philosopher, serif", // label font
+                },
+              }}
+            />
 
             <TextField
               label="Email"
               variant="outlined"
               fullWidth
+              size="medium"
               sx={{
                 "& .MuiInputBase-input": {
                   fontFamily: "Philosopher, serif", // change font here
@@ -107,41 +140,31 @@ function Login() {
                 },
               }}
             />
-
-            <Typography
-              gutterBottom
+                        <TextField
+              label="Re-Type Password"
+              type="password"
+              variant="outlined"
+              fullWidth
               sx={{
-                color: "#000000ff",
-                textAlign: "right",
-                fontFamily: "Philosopher, sans-serif",
-                fontSize: "0.8rem",
+                "& .MuiInputBase-input": {
+                  fontFamily: "Philosopher, serif", // change font here
+                  fontSize: "16px",
+                },
+                "& .MuiInputLabel-root": {
+                  fontFamily: "Philosopher, serif", // label font
+                },
               }}
-            >
-              Forgot Password ?
-            </Typography>
+            />
+
 
             <Button
               variant="contained"
               color="primary"
-              sx={{ fontFamily: "Philosopher" }}
+              sx={{ fontFamily: "Philosopher", textTransform: "none" }}
             >
-              Login
+              Create Account
             </Button>
 
-            <Typography
-              gutterBottom
-              sx={{
-                color: "#000000ff",
-                textAlign: "center",
-                fontFamily: "Philosopher, sans-serif",
-                fontSize: "0.8rem",
-              }}
-            >
-              Don’t have an account?{" "}
-              <Link href="/newuser" underline="hover" sx={{ fontWeight: 500 }}>
-                Sign Up
-              </Link>
-            </Typography>
           </Box></motion.div>
           </Box>
           
@@ -151,4 +174,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Newuser;

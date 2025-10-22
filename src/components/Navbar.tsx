@@ -1,5 +1,5 @@
 import React from "react";
-import { AppBar, Toolbar, Typography, Button } from "@mui/material";
+import { AppBar, Toolbar, Typography, Button, IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
 
 import HomeIcon from '@mui/icons-material/Home';
@@ -26,7 +26,14 @@ function Navbar() {
         <Button color="inherit" component={Link} to="/" sx={{ mr: 2, color:'#007BA7', fontFamily:'Roboto Slab', fontWeight: '600', textTransform: 'none' }} startIcon={<HistoryEduIcon />}>Papers</Button>
         <Button color="inherit" component={Link} to="/" sx={{ mr: 2, color:'#007BA7', fontFamily:'Roboto Slab', fontWeight: '600', textTransform: 'none' }} startIcon={<InfoIcon />}>About</Button>
         {/* <Button color="inherit" component={Link} to="/login" sx={{mr: 2, color:'white', fontFamily:'Roboto Slab', fontWeight: '500', bgcolor:'#DE3163', borderRadius:3, textTransform: 'none'}} startIcon={<AccountCircle />}>Login</Button> */}
-        <AccountCircle sx={{color:'#007FFF', fontSize: '2.3rem'}}/>
+        <IconButton
+  component={Link}
+  to="/login"
+  sx={{ color: '#007FFF', fontSize: '2.3rem' }}
+>
+  <AccountCircle sx={{ fontSize: '2.3rem' }} />
+</IconButton>
+
       </Toolbar>
     </AppBar>
   );
