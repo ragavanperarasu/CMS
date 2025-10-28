@@ -45,7 +45,7 @@ function Login() {
                     transition={{ duration: 1, ease: "easeOut"}}
                   >
         <Box sx={{ width: 400, height: 400 }}>
-          <Lottie animationData={loginAnimation} loop={true} autoplay={true} />
+          <Lottie animationData={loginAnimation} autoplay={true} />
         </Box></motion.div>
 
 
@@ -140,6 +140,22 @@ function Login() {
               Don’t have an account?{" "}
               <Link href="/newuser" underline="hover" sx={{ fontWeight: 500 }}>
                 Sign Up
+              </Link>
+            </Typography>
+
+            <Typography
+              gutterBottom
+              sx={{
+                color: "#000000ff",
+                textAlign: "center",
+                fontFamily: "Philosopher, sans-serif",
+                fontSize: "0.8rem",
+                mt: -2,
+              }}
+            >
+              Back to {" "}
+              <Link href="/" underline="hover" sx={{ fontWeight: 500 }}>
+                Home
               </Link>
             </Typography>
           </Box></motion.div>

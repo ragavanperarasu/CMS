@@ -10,9 +10,12 @@ import {
 } from "@mui/material";
 import Lottie from "lottie-react";
 import { motion } from "framer-motion";
-import loginAnimation from "../assets/ani/Login.json";
+import loginAnimation from "../assets/ani/newuser.json";
 import { PhoneInput } from 'react-international-phone';
 import 'react-international-phone/style.css';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 const roles = [
   { value: 'Author', label: 'Author' },
@@ -27,10 +30,44 @@ const countryCodes = [
 ];
 
 function Newuser() {
-
+const navigate = useNavigate();
   const [countryCode, setCountryCode] = useState("+91");
   const [role, setRole] = useState('Author');
   const [phone, setPhone] = useState('');
+
+  const [username, setUsername] = useState("");
+const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+const [rePassword, setRePassword] = useState("");
+
+
+const handleSubmit = async () => {
+  if (password !== rePassword) {
+    alert("Passwords do not match!");
+    return;
+  }else if(!username || !email || !password || !phone){
+    alert("Please fill all the fields!");
+    return;
+  }
+
+  try {
+    const response = await axios.post("http://localhost:3000/newuser", {
+      username,
+      phoneno: phone,
+      usertype: role,
+      email,
+      password,
+    });
+
+    if (response.status === 200) {
+      navigate("/login");
+
+    }
+  } catch (error) {
+    console.error(error);
+    alert("Error creating account");
+  }
+};
 
 
   return (
@@ -65,8 +102,8 @@ function Newuser() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, ease: "easeOut"}}
                   >
-        <Box sx={{ width: 400, height: 400 }}>
-          <Lottie animationData={loginAnimation} loop={true} autoplay={true} />
+        <Box sx={{ width: 600, height: 500 }}>
+          <Lottie animationData={loginAnimation} autoplay={true} />
         </Box></motion.div>
 
 
@@ -79,6 +116,7 @@ function Newuser() {
             gap: 2,
             pt: 5,
             pb: 5,
+            pr: 2,
           }}
         >
           <motion.div
@@ -115,6 +153,8 @@ function Newuser() {
                   fontFamily: "Philosopher, serif", // label font
                 },
               }}
+              value={username}
+  onChange={(e) => setUsername(e.target.value)}
             />
 
             
@@ -159,6 +199,7 @@ function Newuser() {
               variant="outlined"
               fullWidth
               size="medium"
+              type="email"
               sx={{
                 "& .MuiInputBase-input": {
                   fontFamily: "Philosopher, serif", // change font here
@@ -168,6 +209,8 @@ function Newuser() {
                   fontFamily: "Philosopher, serif", // label font
                 },
               }}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
 
             <Box sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
@@ -185,6 +228,9 @@ function Newuser() {
                   fontFamily: "Philosopher, serif", // label font
                 },
               }}
+              value={password}
+
+              onChange={(e) => setPassword(e.target.value)}
             />
                         <TextField
               label="Re-Type Password"
@@ -200,6 +246,8 @@ function Newuser() {
                   fontFamily: "Philosopher, serif", // label font
                 },
               }}
+              value={rePassword}
+              onChange={(e) => setRePassword(e.target.value)}
             /></Box>
 
 
@@ -207,10 +255,25 @@ function Newuser() {
               variant="contained"
               color="primary"
               sx={{ fontFamily: "Philosopher", textTransform: "none" }}
+              onClick={handleSubmit}
             >
               Create Account
             </Button>
 
+<Typography
+              gutterBottom
+              sx={{
+                color: "#000000ff",
+                textAlign: "center",
+                fontFamily: "Philosopher, sans-serif",
+                fontSize: "0.8rem",
+              }}
+            >
+              Go Back {" "}
+              <Link href="/login" underline="hover" sx={{ fontWeight: 500 }}>
+                Login
+              </Link>
+            </Typography>
           </Box></motion.div>
           </Box>
           
