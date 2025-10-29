@@ -54,6 +54,7 @@ const handleSubmit = async () => {
   }
   else if(password.length < 6){
     toast.warning("Your Password must above 6 characters")
+    return;
   }
   else if (!email.includes('@')) {
   toast.warning("Please enter a valid email address!");
@@ -72,11 +73,16 @@ else if (phone.length !== 10) {
       password,
     });
 
-    if (response.status === 200) {
+    if (response.data === "done") {
   toast.success("Account Created Successfully!");
   setTimeout(() => {
     navigate("/login");
   }, 1500); // wait 1.5 seconds so toast is visible
+}else if(response.data === "exists"){
+  toast.warning("This Mail Id Already exists")
+}
+else{
+  toast.error("Your account not created")
 }
   } catch (error) {
     console.error(error);
