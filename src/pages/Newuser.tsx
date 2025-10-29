@@ -15,6 +15,8 @@ import { PhoneInput } from 'react-international-phone';
 import 'react-international-phone/style.css';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 const roles = [
@@ -42,14 +44,25 @@ const [rePassword, setRePassword] = useState("");
 
 
 const handleSubmit = async () => {
-  if (password !== rePassword) {
-    alert("Passwords do not match!");
-    return;
-  }else if(!username || !email || !password || !phone){
-    alert("Please fill all the fields!");
+  if(!username || !email || !password || !phone){
+    toast.warning("Please fill all the fields!");
     return;
   }
-
+  else if (password !== rePassword) {
+    toast.warning("Passwords do not match!");
+    return;
+  }
+  else if(password.length < 6){
+    toast.warning("Your Password must above 6 characters")
+  }
+  else if (!email.includes('@')) {
+  toast.warning("Please enter a valid email address!");
+  return;
+}
+else if (phone.length !== 10) {
+  toast.warning("Phone number must be 10 digits!");
+  return;
+}
   try {
     const response = await axios.post("http://localhost:3000/newuser", {
       username,
@@ -60,9 +73,11 @@ const handleSubmit = async () => {
     });
 
     if (response.status === 200) {
-      navigate("/login");
-
-    }
+  toast.success("Account Created Successfully!");
+  setTimeout(() => {
+    navigate("/login");
+  }, 1500); // wait 1.5 seconds so toast is visible
+}
   } catch (error) {
     console.error(error);
     alert("Error creating account");
@@ -84,6 +99,7 @@ const handleSubmit = async () => {
         background: "linear-gradient(135deg, #a0eaff 0%, #ffb3ff 100%)",
       }}
     >
+      <ToastContainer position="bottom-right" autoClose={2000} />
       <Box
         sx={{
           display: "flex",
