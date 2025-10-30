@@ -60,10 +60,6 @@ const handleSubmit = async () => {
   toast.warning("Please enter a valid email address!");
   return;
 }
-else if (phone.length !== 10) {
-  toast.warning("Phone number must be 10 digits!");
-  return;
-}
   try {
     const response = await axios.post("http://localhost:3000/newuser", {
       username,
