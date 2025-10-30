@@ -2,11 +2,12 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import { Typography, Container, Box, Avatar, Stack, Button } from "@mui/material";
 import NavbarAuthor from "../components/NavbarAuthor";
+import { useNavigate } from "react-router-dom";
 
 const AuthorDashboard = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { data } = location.state || {};
-  console.log(data);
 
   return (
     <Container sx={{ minWidth: "100vw", padding: 2, minHeight: "100vh", bgcolor: "#f4f8ff" }}>
@@ -105,7 +106,7 @@ const AuthorDashboard = () => {
                 variant="contained"
                 color="primary"
                 sx={{ fontFamily: "Philosopher", fontSize:'.8rem', bgcolor:'#39A78D', mt:2}}
-                
+                onClick={()=> navigate('/authorpaperupl', {state: {data}})}
               >
                 Create
               </Button>
