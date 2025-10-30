@@ -10,7 +10,7 @@ const AuthorDashboard = () => {
   const { data } = location.state || {};
 
   return (
-    <Container sx={{ minWidth: "100vw", padding: 2, minHeight: "100vh", bgcolor: "#f4f8ff" }}>
+    <Container sx={{ minWidth: "100vw", padding: 2, minHeight: "100vh", bgcolor: "#F0F8FF" }}>
       <NavbarAuthor />     
 <Container
   sx={{
@@ -19,7 +19,7 @@ const AuthorDashboard = () => {
     justifyContent: "flex-start",
     mt: 3,
     p: 4,
-    borderRadius: 3,
+    borderRadius: 5,
     bgcolor: "white",
     boxShadow: "0 8px 24px rgba(0,0,0,0.1)",
     minWidth: "100%",          // ✅ use this
@@ -78,7 +78,7 @@ const AuthorDashboard = () => {
     justifyContent: "flex-start",
     mt: 3,
     p: 4,
-    borderRadius: 3,
+    borderRadius: 5,
     bgcolor: "white",
     boxShadow: "0 8px 24px rgba(0,0,0,0.1)",
     minWidth: "100%",          // ✅ use this
@@ -122,7 +122,7 @@ const AuthorDashboard = () => {
     justifyContent: "flex-start",
     mt: 3,
     p: 4,
-    borderRadius: 3,
+    borderRadius: 5,
     bgcolor: "white",
     boxShadow: "0 8px 24px rgba(0,0,0,0.1)",
     minWidth: "100%",          // ✅ use this
