@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Container,
   TextField,
@@ -25,7 +25,10 @@ const AuthorPaperUpl = () => {
   const [paperTitle, setPaperTitle] = useState("");
   const [paperDes, setPaperDes] = useState("");
   const [videoURL, setVideoURL] = useState("");
+  const [price, setPrice] = useState("");
   const [pdfFile, setPdfFile] = useState(null);
+
+
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -47,9 +50,19 @@ const AuthorPaperUpl = () => {
       formData.append("paperTitle", paperTitle);
       formData.append("paperDes", paperDes);
       formData.append("videoURL", videoURL);
+      formData.append("email", data.email);
       formData.append("pdfFile", pdfFile);
+      formData.append("price", price);
 
       const response = await axios.post("http://localhost:3000/uploadpaper", formData);
+      if(response.data === "done"){
+        toast.success("Paper uploaded successfully!");
+        setTimeout(() => {
+    navigate('/authordashboard', {state: {data}});
+  }, 1500);
+      } else {
+        toast.error("Failed to upload paper. Please try again.");
+      }
 
     } catch (error) {
       console.error(error);
@@ -166,11 +179,29 @@ const AuthorPaperUpl = () => {
                 onChange={(e) => setVideoURL(e.target.value)}
               /> 
 
+              <TextField
+                label="Paper Price (in INR)"
+                
+                variant="outlined"
+                fullWidth
+                sx={{
+                  "& .MuiInputBase-input": {
+                    fontFamily: "Philosopher, serif", // change font here
+                    fontSize: "16px",
+                  },
+                  "& .MuiInputLabel-root": {
+                    fontFamily: "Philosopher, serif", // label font
+                  },
+                }}
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+              /> 
+
 
       <Button
         variant="contained"
         component="label"
-        sx={{ mt: 2, fontFamily: "Philosopher, serif", textTransform:'none', bgcolor:'#39A78D' }}
+        sx={{ mt: 0, fontFamily: "Philosopher, serif", textTransform:'none', bgcolor:'#39A78D' }}
       >
         Choose PDF
         <input type="file" hidden accept="application/pdf" onChange={handleFileChange} />
@@ -192,7 +223,7 @@ const AuthorPaperUpl = () => {
               <Button
                 variant="contained"
                 color="primary"
-                sx={{ fontFamily: "Philosopher", textTransform:'none', bgcolor:'#39A78D', mt:0}}
+                sx={{ fontFamily: "Philosopher", textTransform:'none', bgcolor:'#395ca7ff', mt:-3}}
                 onClick={handleSubmit}
               >
                 Create

@@ -1,11 +1,11 @@
 import React,{useState, useEffect} from "react";
 import { useLocation } from "react-router-dom";
 import { Typography, Container, Box, Avatar, Stack, Button } from "@mui/material";
-import NavbarAuthor from "../components/NavbarAuthor";
+import NavbarReviewer from "../components/NavbarReviewer";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const AuthorDashboard = () => {
+const ReviewerDashboard = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { data } = location.state || {};
@@ -21,14 +21,12 @@ useEffect(() => {
 
   const load = async () => {
     try {
-      const response = await axios.post("http://localhost:3000/viewpapercount", {
-        email: data.email,
+      const response = await axios.post("http://localhost:3000/viewpapercountrev", {
         status: "Under Reviewer",
       });
 
-      const response2 = await axios.post("http://localhost:3000/viewpapercount", {
-        email: data.email,
-        status: "Under Admin",
+      const response2 = await axios.post("http://localhost:3000/viewpapercountrev", {
+        status: "Public",
       });
 
       setUnderReviewer(response.data);
@@ -42,7 +40,7 @@ useEffect(() => {
 
   return (
     <Container sx={{ minWidth: "100vw", padding: 2, minHeight: "100vh", bgcolor: "#F0F8FF" }}>
-      <NavbarAuthor />     
+      <NavbarReviewer />     
 <Container
   sx={{
     display: "flex",
@@ -147,7 +145,7 @@ useEffect(() => {
       width: "100%",
     }}
   >
-    {[`Under Reviewer : ${underReviewer}`, `Under Admin : ${underAdmin}`, `Total Paper : ${totalpaper}`].map(
+    {[`Pending Paper : ${underReviewer}`, `Completed Paper : ${underAdmin}`, `Total Paper : ${totalpaper}`].map(
       (text, i) => (
         <Typography
           key={i}
@@ -171,8 +169,7 @@ useEffect(() => {
 
 
 
-
-<Box
+      <Box
   sx={{
     display: "flex",
     alignItems: "center",
@@ -200,16 +197,16 @@ useEffect(() => {
               fontWeight: "bold",
             }}
           >
-            Create New Paper
+            View Pending Papers
           </Typography>
 
                         <Button
                 variant="contained"
                 color="primary"
                 sx={{ fontFamily: "Philosopher", fontSize:'.8rem', bgcolor:'#39A78D', mt:2}}
-                onClick={()=> navigate('/authorpaperupl', {state: {data}})}
+                 onClick={()=> navigate('/reviewerpapershow', {state: {data}})}
               >
-                Create
+                View
               </Button>
 
         </Box>
@@ -244,14 +241,14 @@ useEffect(() => {
               fontWeight: "bold",
             }}
           >
-            View Submitted Papers
+            View Completed Papers
           </Typography>
 
                         <Button
                 variant="contained"
                 color="primary"
                 sx={{ fontFamily: "Philosopher", fontSize:'.8rem', bgcolor:'#39A78D', mt:2}}
-                 onClick={()=> navigate('/authorpapershow', {state: {data}})}
+                 onClick={()=> navigate('/papershow')}
               >
                 View
               </Button>
@@ -259,10 +256,11 @@ useEffect(() => {
         </Box>
       </Box>
 
+
       
 
     </Container>
   );
 };
 
-export default AuthorDashboard;
+export default ReviewerDashboard;

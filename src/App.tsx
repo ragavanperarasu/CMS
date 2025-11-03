@@ -5,6 +5,10 @@ import Login from "./pages/Login";
 import Newuser from "./pages/Newuser";
 import AuthorDashboard from "./pages/AuthorDashboard";
 import AuthorPaperUpl from "./pages/AuthorPaperUpl";
+import AuthorPaperShow from "./pages/AuthorPaperShow";
+import ReviewerDashboard from "./pages/ReviewerDashboard";
+import ReviewerPaperShow from "./pages/ReviewerPaperShow";
+import PaperShow from "./pages/PaperShow";
 
 function App() {
   return (
@@ -15,6 +19,10 @@ function App() {
         <Route path="/newuser" element={<Newuser />} />
         <Route path="/authordashboard" element={<AuthorDashboard />} />
         <Route path="/authorpaperupl" element={<AuthorPaperUpl />} />
+        <Route path="/authorpapershow" element={<AuthorPaperShow />} />
+        <Route path="/reviewerdashboard" element={<ReviewerDashboard />} />
+        <Route path="/reviewerpapershow" element={<ReviewerPaperShow />} />
+        <Route path="/papershow" element={<PaperShow />} />
       </Routes>
     </Router>
   );

@@ -35,10 +35,15 @@ function Login() {
         email,
         password,
       });
+      console.log(response.data);
       if (response.data === "invalid") {
         toast.warning("Please Check you Email and Password");
-      } else {
+      } else if (response.data.usertype === "Author") {
         navigate("/authordashboard", {
+          state: { data: response.data },
+        });
+      }else if (response.data.usertype === "Reviewer"){
+        navigate("/reviewerdashboard", {
           state: { data: response.data },
         });
       }
